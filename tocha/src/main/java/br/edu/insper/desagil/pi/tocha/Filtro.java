@@ -2,29 +2,39 @@ package br.edu.insper.desagil.pi.tocha;
 
 public class Filtro {
     private String tipo;
+    private Imagem imagem;
 
-    public Filtro(String tipo) {
+
+    public Filtro(String tipo, Imagem imagem) {
         this.tipo = tipo;
+        this.imagem = imagem;
+    }
+
+    public void inicializaSaida(){
+        int[][] entrada = imagem.getPixels();
+
+        int altura = entrada.length;
+        if (altura < 3) {
+            throw new IllegalStateException("altura pequena");
+        }
+
+        int largura = entrada[0].length;
+        if (largura < 3) {
+            throw new IllegalStateException("largura pequena");
+        }
+
     }
 
     public Imagem processa(Imagem imagem) {
+        this.imagem = imagem;
+        return processa(null, 0, 0, null);
+    }
+
+    public Imagem processa(int[][] saida, int largura, int altura, double[][] entrada) {
+
         if (tipo.equals("media")) {
             // inicializa saída
-
-            int[][] entrada = imagem.getPixels();
-
-            int altura = entrada.length;
-            if (altura < 3) {
-                throw new IllegalStateException("altura pequena");
-            }
-
-            int largura = entrada[0].length;
-            if (largura < 3) {
-                throw new IllegalStateException("largura pequena");
-            }
-
-            int[][] saida = new int[altura - 2][largura - 2];
-
+            inicializaSaida();
             // inicializa kernel
 
             double[][] kernel = new double[3][3];
@@ -56,19 +66,7 @@ public class Filtro {
         } else if (tipo.equals("sobel_x")) {
             // inicializa saída
 
-            int[][] entrada = imagem.getPixels();
-
-            int altura = entrada.length;
-            if (altura < 3) {
-                throw new IllegalStateException("altura pequena");
-            }
-
-            int largura = entrada[0].length;
-            if (largura < 3) {
-                throw new IllegalStateException("largura pequena");
-            }
-
-            int[][] saida = new int[altura - 2][largura - 2];
+            inicializaSaida();
 
             // inicializa kernel
 
@@ -101,19 +99,7 @@ public class Filtro {
         } else if (tipo.equals("sobel_y")) {
             // inicializa saída
 
-            int[][] entrada = imagem.getPixels();
-
-            int altura = entrada.length;
-            if (altura < 3) {
-                throw new IllegalStateException("altura pequena");
-            }
-
-            int largura = entrada[0].length;
-            if (largura < 3) {
-                throw new IllegalStateException("largura pequena");
-            }
-
-            int[][] saida = new int[altura - 2][largura - 2];
+            inicializaSaida();
 
             // inicializa kernel
 
@@ -145,20 +131,7 @@ public class Filtro {
             return new Imagem(saida);
         } else if (tipo.equals("laplace")) {
             // inicializa saída
-
-            int[][] entrada = imagem.getPixels();
-
-            int altura = entrada.length;
-            if (altura < 3) {
-                throw new IllegalStateException("altura pequena");
-            }
-
-            int largura = entrada[0].length;
-            if (largura < 3) {
-                throw new IllegalStateException("largura pequena");
-            }
-
-            int[][] saida = new int[altura - 2][largura - 2];
+            inicializaSaida();
 
             // inicializa kernel
 

@@ -18,6 +18,7 @@ public class Sequencia {
         filtros.remove(indice);
     }
 
+
     public Imagem processa(Imagem imagem) {
         for (Filtro filtro : filtros) {
             imagem = filtro.processa(imagem);
