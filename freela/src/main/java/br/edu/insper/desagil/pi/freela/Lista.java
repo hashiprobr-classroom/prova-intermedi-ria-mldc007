@@ -8,6 +8,7 @@ public class Lista {
     private List<Tarefa> tarefas;
 
     public Lista(){
+
         tarefas = new ArrayList<>();
     }
     public List<Tarefa> getTarefas() {
